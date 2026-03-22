@@ -16,7 +16,7 @@ ArrayQueue<T>::ArrayQueue(const ArrayQueue<T>& copyObj) {
 template <typename T>
 ArrayQueue<T>& ArrayQueue<T>::operator=(const ArrayQueue<T>& rightObj) {
     if (this != &rightObj) {
-        clear();
+        delete[] buffer;
         copy(rightObj);
     }
     return *this;
@@ -24,7 +24,7 @@ ArrayQueue<T>& ArrayQueue<T>::operator=(const ArrayQueue<T>& rightObj) {
 
 template <typename T>
 ArrayQueue<T>::~ArrayQueue() {
-    clear();
+    delete[] buffer;
 }
 
 template <typename T>
@@ -37,9 +37,8 @@ T ArrayQueue<T>::back() const {
 
 template <typename T>
 void ArrayQueue<T>::clear() {
-    delete[] buffer;
     frontIndex = 0;
-    backIndex = 0;
+    backIndex = -1;
     this->length = 0;
 }
 
